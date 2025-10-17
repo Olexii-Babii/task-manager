@@ -36,4 +36,7 @@ class Task(models.Model):
 
 
 class Worker(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.DO_NOTHING)
+    position = models.ForeignKey(
+        Position,
+        on_delete=models.DO_NOTHING,
+        null=True,)
