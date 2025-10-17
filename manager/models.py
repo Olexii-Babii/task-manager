@@ -35,6 +35,8 @@ class Task(models.Model):
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField("Worker", related_name="assignees")
 
+    def __str__(self):
+        return f"Name: {self.name}, type: {self.task_type.name}, priority: {self.priority}"
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
