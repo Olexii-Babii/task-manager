@@ -22,7 +22,8 @@ class Task(models.Model):
         HIGH = "HI", "High"
         MEDIUM = "MED", "Medium"
         LOW = "LOW", "Low"
-    name =models.CharField(max_length=63)
+
+    name = models.CharField(max_length=63)
     description = models.TextField(blank=True)
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
@@ -39,4 +40,5 @@ class Worker(AbstractUser):
     position = models.ForeignKey(
         Position,
         on_delete=models.DO_NOTHING,
-        null=True,)
+        null=True,
+    )
