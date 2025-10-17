@@ -46,3 +46,6 @@ class Worker(AbstractUser):
         on_delete=models.DO_NOTHING,
         null=True,
     )
+
+    def __str__(self):
+        return f"{self.username}: {self.first_name} {self.last_name}"
