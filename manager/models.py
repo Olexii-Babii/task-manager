@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 
+from task_manager import settings
+
 
 class TaskType(models.Model):
     name = models.CharField(max_length=63)
@@ -33,7 +35,7 @@ class Task(models.Model):
         default=StrChoices.MEDIUM,
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField("Worker", related_name="assignees")
+    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="assignees")
 
     def __str__(self):
         return f"Name: {self.name}, type: {self.task_type.name}, priority: {self.priority}"
