@@ -5,14 +5,14 @@ from task_manager import settings
 
 
 class TaskType(models.Model):
-    name = models.CharField(max_length=63)
+    name = models.CharField(max_length=63, unique=True)
 
     def __str__(self):
         return self.name
 
 
 class Position(models.Model):
-    name = models.CharField(max_length=63)
+    name = models.CharField(max_length=63, unique=True)
 
     def __str__(self):
         return self.name
@@ -46,6 +46,9 @@ class Worker(AbstractUser):
         on_delete=models.DO_NOTHING,
         null=True,
     )
+    class Meta:
+        verbose_name = "worker"
+        verbose_name_plural = "workers"
 
     def __str__(self):
         return f"{self.username}: {self.first_name} {self.last_name}"
