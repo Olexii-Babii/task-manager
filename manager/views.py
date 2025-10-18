@@ -6,4 +6,8 @@ from .models import Worker, Task
 def index(request) -> HttpResponse:
     num_workers = get_user_model().objects.count()
     num_tasks = Task.objects.count()
-    return HttpResponse("<h1>Hello world<h1/>")
+    context = {
+        "num_workers": num_workers,
+        "num_tasks": num_tasks,
+    }
+    return render(request, "manager/index.html", context)
