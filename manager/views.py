@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import generic
+
 from .models import Worker, Task
 
 def index(request) -> HttpResponse:
@@ -11,3 +13,9 @@ def index(request) -> HttpResponse:
         "num_tasks": num_tasks,
     }
     return render(request, "manager/index.html", context)
+
+
+class WorkersListView(generic.ListView):
+    model = Worker
+    paginate_by = 10
+    queryset = Worker.objects.all().select_related("position")
