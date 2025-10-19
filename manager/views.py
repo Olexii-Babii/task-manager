@@ -19,3 +19,9 @@ class WorkersListView(generic.ListView):
     model = Worker
     paginate_by = 10
     queryset = Worker.objects.all().select_related("position")
+
+
+class TasksListView(generic.ListView):
+    model = Task
+    paginate_by = 10
+    queryset = Task.objects.select_related("task_type")
