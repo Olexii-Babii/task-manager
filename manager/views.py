@@ -29,6 +29,9 @@ class TasksListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
     queryset = Task.objects.select_related("task_type")
 
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Task
+
 
 class TasksCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task

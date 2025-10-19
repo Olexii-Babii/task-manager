@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Task №{{ task.id }}</h1>
+  <p>Name: {{ task.name }}</p>
+  <p>Priority: {% if task.priority == "URG" %}Urgent
+          {% endif %}
+            {% if task.priority == "HI" %}High
+          {% endif %}
+            {% if task.priority == "MED" %}Medium
+          {% endif %}
+            {% if task.priority == "LOW" %}Low
+          {% endif %}</p>
+  <p>Deadline: {{ task.deadline }}</p>
+  <p>Completed: {% if task.is_completed is False %}No{% else %}Yes{% endif %}</p>
+  <p>Type: {{ task.task_type.name }}</p>
+  <p>Assignees:
+    <ul>
+      {% for worker in task.assignees.all %}
+        <li>{{ worker.username }} - {{ worker.first_name }} {{ worker.last_name }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+  <p>Description: {{ task.description }}</p>
+{% endblock %}
