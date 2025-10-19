@@ -17,16 +17,16 @@
       {% for task in task_list %}
         <tr>
           <td>{{ task.id }}</td>
-          <td>{{ task.name }}</td>
+          <td><a href="{% url 'manager:tasks-detail' pk=task.id %}">{{ task.name }}</a></td>
           <td>{{ task.deadline }}</td>
           <td>{% if task.is_completed is False %}No{% else %}Yes{% endif %}</td>
-          <td>{% if task.priority == "URG" %}Urgent
+          <td>{% if task.priority == "1" %}Urgent
           {% endif %}
-            {% if task.priority == "HI" %}High
+            {% if task.priority == "2" %}High
           {% endif %}
-            {% if task.priority == "MED" %}Medium
+            {% if task.priority == "3" %}Medium
           {% endif %}
-            {% if task.priority == "LOW" %}Low
+            {% if task.priority == "4" %}Low
           {% endif %}
           </td>
           <td>{{ task.task_type.name}}</td>

@@ -20,10 +20,10 @@ class Position(models.Model):
 
 class Task(models.Model):
     class StrChoices(models.TextChoices):
-        URGENT = "URG", "Urgent"
-        HIGH = "HI", "High"
-        MEDIUM = "MED", "Medium"
-        LOW = "LOW", "Low"
+        URGENT = "1", "Urgent"
+        HIGH = "2", "High"
+        MEDIUM = "3", "Medium"
+        LOW = "4", "Low"
 
     name = models.CharField(max_length=63)
     description = models.TextField(blank=True)
@@ -36,6 +36,9 @@ class Task(models.Model):
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="assignees")
+
+    class Meta:
+        ordering = ["is_completed", "priority"]
 
     def __str__(self):
         return f"Name: {self.name}, type: {self.task_type.name}, priority: {self.priority}"
