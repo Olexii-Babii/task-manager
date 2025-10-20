@@ -26,3 +26,16 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = "__all__"
+
+
+class TaskSearchForm(forms.Form):
+    parameter = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Search by name, type"
+            }
+        )
+    )

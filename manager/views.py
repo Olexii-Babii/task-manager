@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import WorkerCreationForm, WorkerUpdateForm, TaskForm
+from .forms import WorkerCreationForm, WorkerUpdateForm, TaskForm, TaskSearchForm
 # from .forms import TaskForm
 from .models import Worker, Task
 
@@ -29,6 +30,22 @@ class TasksListView(LoginRequiredMixin, generic.ListView):
     model = Task
     paginate_by = 10
     queryset = Task.objects.select_related("task_type")
+
+    def get_context_data(
+            self, *, object_list=..., **kwargs
+    ):
+        context = super(TasksListView, self).get_context_data(**kwargs)
+        context["search_form"] = TaskSearchForm()
+        return context
+
+    def get_queryset(self):
+        param = self.request.GET.get("parameter")
+        if param:
+            return self.queryset.filter(
+                Q(name__icontains=param) |
+                Q(task_type__name__icontains=param))
+        return self.queryset.all()
+
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
