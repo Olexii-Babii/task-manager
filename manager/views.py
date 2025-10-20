@@ -48,3 +48,12 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     fields = "__all__"
     success_url = reverse_lazy("manager:tasks-list")
+
+
+class MyTaskListView(LoginRequiredMixin, generic.ListView):
+    model = Task
+    paginate_by = 10
+    template_name = "manager/task_list.html"
+
+    def get_queryset(self):
+        return Task.objects.filter(id=self.kwargs["pk"]).select_related("task_type")
