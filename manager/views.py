@@ -67,3 +67,14 @@ class WorkersCreateView(LoginRequiredMixin, generic.CreateView):
     model = Worker
     fields = "__all__"
     success_url = reverse_lazy("manager:workers-list")
+
+
+class WorkersUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Worker
+    fields = "__all__"
+    success_url = reverse_lazy("manager:workers-list")
+
+
+class WorkersDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Worker
+    success_url = reverse_lazy("manager:workers-list")
