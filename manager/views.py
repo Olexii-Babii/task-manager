@@ -46,7 +46,7 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
 
 class TasksListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    paginate_by = 10
+    paginate_by = 2
     queryset = Task.objects.select_related("task_type")
 
     def get_context_data(
