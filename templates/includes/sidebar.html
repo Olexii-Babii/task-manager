@@ -18,7 +18,9 @@
   <br>
 
   <li class="list-group-item"><a href="{% url 'manager:index' %}">Home</a></li>
-  <li class="list-group-item"><a href="{% url 'manager:mytasks-list' pk=user.id %}">My tasks</a></li>
+  {% if user.is_authenticated %}
+    <li class="list-group-item"><a href="{% url 'manager:mytasks-list' pk=user.id %}">My tasks</a></li>
+  {% endif %}
   <li class="list-group-item"><a href="{% url 'manager:tasks-list' %}">All tasks</a></li>
   <li class="list-group-item"><a href="{% url 'manager:workers-list' %}">All workers</a></li>
 </ul>
