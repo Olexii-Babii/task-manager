@@ -29,7 +29,8 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
             self, *, object_list=..., **kwargs
     ):
         context = super(WorkersListView, self).get_context_data(**kwargs)
-        context["search_form"] = WorkerSearchForm()
+        parameter = self.request.GET.get("parameter", "")
+        context["search_form"] = WorkerSearchForm(initial={"parameter": parameter})
         return context
 
     def get_queryset(self):
@@ -52,7 +53,8 @@ class TasksListView(LoginRequiredMixin, generic.ListView):
             self, *, object_list=..., **kwargs
     ):
         context = super(TasksListView, self).get_context_data(**kwargs)
-        context["search_form"] = TaskSearchForm()
+        parameter = self.request.GET.get("parameter", "")
+        context["search_form"] = TaskSearchForm(initial={"parameter": parameter})
         return context
 
     def get_queryset(self):
@@ -94,7 +96,8 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
             self, *, object_list=..., **kwargs
     ):
         context = super(MyTaskListView, self).get_context_data(**kwargs)
-        context["search_form"] = TaskSearchForm()
+        parameter = self.request.GET.get("parameter", "")
+        context["search_form"] = TaskSearchForm(initial={"parameter": parameter})
         return context
 
     def get_queryset(self):
