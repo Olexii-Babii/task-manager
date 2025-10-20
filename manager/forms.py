@@ -39,3 +39,17 @@ class TaskSearchForm(forms.Form):
             }
         )
     )
+
+
+
+class WorkerSearchForm(forms.Form):
+    parameter = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Search by username, first/last name, position"
+            }
+        )
+    )

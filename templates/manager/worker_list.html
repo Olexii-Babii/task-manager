@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 {% block content %}
   <h1>Workers list
   <a href="{% url 'manager:workers-create' %}" class="btn btn-primary link-to-page">
@@ -6,6 +7,11 @@
     </a>
   </h1>
 
+  <br>
+  <form action="" method="get">
+    {{ search_form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Search">
+  </form>
   <br>
 
   {% if worker_list %}
