@@ -35,7 +35,7 @@ class Task(models.Model):
         default=StrChoices.MEDIUM,
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="assignees")
+    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
 
     class Meta:
         ordering = ["is_completed", "priority"]

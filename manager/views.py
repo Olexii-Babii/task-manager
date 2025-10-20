@@ -57,3 +57,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Task.objects.filter(id=self.kwargs["pk"]).select_related("task_type")
+
+
+class WorkersDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Worker
