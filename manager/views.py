@@ -46,7 +46,7 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
 
 class TasksListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    paginate_by = 2
+    paginate_by = 10
     queryset = Task.objects.select_related("task_type")
 
     def get_context_data(
@@ -114,6 +114,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
 
 class WorkersDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
+    queryset = get_user_model().objects.all().select_related("position").prefetch_related("tasks__task_type")
 
 
 class WorkersCreateView(LoginRequiredMixin, generic.CreateView):
