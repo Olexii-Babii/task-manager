@@ -57,6 +57,7 @@ class TasksListView(LoginRequiredMixin, generic.ListView):
         context = super(TasksListView, self).get_context_data(**kwargs)
         parameter = self.request.GET.get("parameter", "")
         context["search_form"] = TaskSearchForm(initial={"parameter": parameter})
+        context["page_name"] = "Task list"
         return context
 
     def get_queryset(self):
@@ -100,6 +101,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
         context = super(MyTaskListView, self).get_context_data(**kwargs)
         parameter = self.request.GET.get("parameter", "")
         context["search_form"] = TaskSearchForm(initial={"parameter": parameter})
+        context["page_name"] = "My tasks"
         return context
 
     def get_queryset(self):
