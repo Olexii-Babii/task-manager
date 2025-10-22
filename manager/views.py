@@ -12,10 +12,12 @@ from .models import Worker, Task
 
 def index(request) -> HttpResponse:
     num_workers = get_user_model().objects.count()
-    num_tasks = Task.objects.count()
+    num_active_tasks = Task.objects.filter(is_completed=False).count()
+    num_completed_tasks = Task.objects.filter(is_completed=True).count()
     context = {
         "num_workers": num_workers,
-        "num_tasks": num_tasks,
+        "num_active_tasks": num_active_tasks,
+        "num_completed_tasks": num_completed_tasks,
     }
     return render(request, "manager/index.html", context)
 

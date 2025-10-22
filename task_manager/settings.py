@@ -66,6 +66,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "manager.context_processors.cfg_assets_root",
             ],
         },
     },
@@ -131,6 +132,8 @@ AUTH_USER_MODEL = "manager.Worker"
 STATICFILES_DIRS = [
  BASE_DIR / "static",
 ]
+
+ASSETS_ROOT = "/static/assets"
 
 INTERNAL_IPS = [
     "127.0.0.1",
