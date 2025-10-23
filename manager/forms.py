@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.widgets import CheckboxInput
 
 from manager.models import Worker, Task
 
@@ -36,6 +37,12 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if not isinstance(field.widget, CheckboxInput):
+                field.widget.attrs["class"] = "custom-class"
 
 
 class TaskSearchForm(forms.Form):
