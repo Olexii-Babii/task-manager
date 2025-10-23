@@ -10,11 +10,21 @@ class WorkerCreationForm(UserCreationForm):
         model = Worker
         fields = UserCreationForm.Meta.fields + ("position", )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "custom-class"
+
 
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
         fields = ("first_name", "last_name", "email", "position",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "custom-class"
 
 
 class TaskForm(forms.ModelForm):
