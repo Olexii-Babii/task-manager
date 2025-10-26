@@ -1,0 +1,72 @@
+from django import forms
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.forms.widgets import CheckboxInput
+
+from manager.models import Worker, Task
+
+
+class WorkerCreationForm(UserCreationForm):
+    class Meta:
+        model = Worker
+        fields = UserCreationForm.Meta.fields + ("position", )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "custom-class"
+
+
+class WorkerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ("first_name", "last_name", "email", "position",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "custom-class"
+
+
+class TaskForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+    )
+    class Meta:
+        model = Task
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if not isinstance(field.widget, CheckboxInput):
+                field.widget.attrs["class"] = "custom-class"
+
+
+class TaskSearchForm(forms.Form):
+    parameter = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Search by name, type"
+            }
+        )
+    )
+
+
+
+class WorkerSearchForm(forms.Form):
+    parameter = forms.CharField(
+        max_length=63,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Search by username, first/last name, position"
+            }
+        )
+    )
