@@ -5,10 +5,12 @@ On this resource, you and your team can conveniently manage your tasks. Create n
 # Check it out!
 
 [Task manager project deployed on Render](https://task-manager-x9nu.onrender.com)
+(login: admin.user,
+password: QAZwsxedc)
 
 ## Installation
 
-Python must be already installed]
+Python must be already installed
 
 ```shell
 git clone https://github.com/Olexii-Babii/task-manager.git
